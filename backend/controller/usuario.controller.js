@@ -4,14 +4,23 @@ const cadastrar = async (req, res)=>{
     const valores = req.body
     console.log(valores)
 
-    if(!valores.nome || !valores.email || !valores.senha){
+    if(!valores.nome || !valores.email || !valores.senha || !valores.cpf || !valores.telefone){ // alterado para incluir cpf e telefone
         return res.status(400).json({message: 'Todos os campos são obrigatórios!'})
     }
 
-    try{
-        await Usuario.create(valores)
-        res.status(201).json({message: 'Usuario Cadastrado com sucesso!'})
-    }catch(err){
+    try { // alterado para criptografar cpf e senha antes de salvar no banco de dados
+        const cpfCrypto = crypto.AES.encrypt(valores.cpf, CHAVE_SECRETA).toString()
+        const senhaCrypto = crypto.AES.encrypt(valores.senha, CHAVE_SECRETA).toString()
+        await Usuario.create({ 
+            nome: valores.nome,
+            email: valores.email,
+            senha: senhaCrypto,
+            cpf: cpfCrypto,
+            telefone: valores.telefone
+        })
+        res.status(201).json({message: 'Usuário cadastrado com sucesso!'})
+    }
+    catch(err){
         console.error('Não foi possível cadastrar o Usuário',err)
         res.status(500).json({message: 'Não foi possível cadastrar o Usuário'})
     }

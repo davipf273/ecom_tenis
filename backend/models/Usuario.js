@@ -18,6 +18,14 @@ const Usuario = db.define('usuario',{
     senha: {
         type: DataTypes.STRING(40),
         allowNull: false
+    },
+    cpf: { // adicionado campo cpf
+        type: DataTypes.STRING(40),
+        allowNull: false
+    },
+    telefone: { // adicionado campo telefone
+        type: DataTypes.STRING(40),
+        allowNull: false
     }
 },{
     timestamps: false,

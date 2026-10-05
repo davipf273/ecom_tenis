@@ -7,11 +7,15 @@ btn_cadastrar.addEventListener('click', (e) => {
     const nome = document.getElementById('nome').value
     const email = document.getElementById('email').value
     const senha = document.getElementById('senha').value
+    const cpf = document.getElementById('cpf').value // adicionado campo cpf
+    const telefone = document.getElementById('telefone').value // adicionado campo telefone
 
     const usuario = { 
         nome: nome,
         email: email,
-        senha: senha
+        senha: senha,
+        cpf: cpf, // adicionado campo cpf
+        telefone: telefone, // adicionado campo telefone
     }
 
     fetch('http://localhost:3000/usuario', {

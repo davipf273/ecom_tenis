@@ -8,6 +8,8 @@ btn_atualizar.addEventListener('click', (e) => {
     const nome = document.getElementById('nome').value
     const email = document.getElementById('email').value
     const senha = document.getElementById('senha').value
+    const cpf = document.getElementById('cpf').value // adicionado campo cpf
+    const telefone = document.getElementById('telefone').value // adicionado campo telefone
 
     if (!codUsuario) {
         resposta.innerHTML = '<p>Por favor, informe o Código do Usuário!</p>'
@@ -17,7 +19,10 @@ btn_atualizar.addEventListener('click', (e) => {
     const usuarioAtualizado = {
         nome: nome,
         email: email,
-        senha: senha
+        senha: senha,
+        cpf: cpf, // adicionado campo cpf
+        telefone: telefone // adicionado campo telefone
+
     }
 
     fetch(`http://localhost:3000/usuario/${codUsuario}`, {

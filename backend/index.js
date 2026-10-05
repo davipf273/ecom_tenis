@@ -7,6 +7,8 @@ const produtoController = require('./controller/produto.controller')
 const usuarioController = require('./controller/usuario.controller')
 const movimentoController = require('./controller/movimento.controller')
 const relatVwController = require('./controller/relatVW.controller')
+const authController = require('./controller/relatVW.controller')
+const authMiddleware = require('./')
 const hostname =  'localhost' // 127.0.0.1
 const PORT = 3000
 // ------------ Middleware ----------
@@ -16,6 +18,10 @@ app.use(cors())
 //--------------- Rotas --------------
 
 app.post('/usuario', usuarioController.cadastrar)
+app.post('/login', authController.login)
+
+app.use(authMiddleware)
+
 app.get('/usuarios', usuarioController.listar)
 app.get('/usuario/:id', usuarioController.buscarPorCod)
 app.get('/usuario/buscar/:nome', usuarioController.buscarPorNome)
